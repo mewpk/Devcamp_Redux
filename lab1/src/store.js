@@ -1,8 +1,12 @@
 import { createStore} from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
+import calculateReducer from './calculateReducer'
 
 const store = configureStore({
-    reducer: {}
+    reducer: {
+        counter: calculateReducer
+    }
 })
 
 export default store
+

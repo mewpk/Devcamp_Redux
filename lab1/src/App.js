@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, decrement, setDefault } from './calculateReducer'
 
 function App() {
+  // Get ค่า State
+  const count = useSelector(state => state.counter)
+  // ใช้เรียก Actions
+  const dispatch = useDispatch()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <><h1>{count.salary}</h1>
+      <input type='button' value="Increase Salary" onClick={() => dispatch(increment())} />
+      <input type='button' value="Decreate Salary" onClick={() => dispatch(decrement())} />
+      <input type='button' value="Default Salary" onClick={() => dispatch(setDefault())} />
+    </>
   );
 }
 
 export default App;
+
+
