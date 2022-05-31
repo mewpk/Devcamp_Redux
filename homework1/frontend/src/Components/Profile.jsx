@@ -1,73 +1,103 @@
 import React from "react";
+import { Form, Input, Button, Checkbox } from "antd";
 import "antd/dist/antd.css";
-import { Table, Tag, Space } from "antd";
-const { Column, ColumnGroup } = Table;
-import { useSelector , useDispath } from "react-redux";
-import {insertData} from "../Reducers/profileReducer"
+import {  useDispatch } from "react-redux";
+import { insertData } from "../Reducers/profileReducer";
 
 export default function Profile() {
   //get value state
+  // const data = useSelector((state) => [state.profile]);
+  const dispatch = useDispatch();
 
-  const data = [
-    {
-      key: "1",
-      firstName: "John",
-      lastName: "Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    },
-    {
-      key: "2",
-      firstName: "Jim",
-      lastName: "Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"],
-    },
-    {
-      key: "3",
-      firstName: "Joe",
-      lastName: "Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-  ];
+  const onFinish = (values) => {
+    // console.log(values);
+    dispatch(insertData(values));
+    console.log("Success:", values);
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+  // console.log(data);
   return (
-    <div style={{ height: "100vh" , border : "3px solid black" }}>
-      <Table dataSource={data}>
-        <ColumnGroup title="Name">
-          <Column title="First Name" dataIndex="firstName" key="firstName" />
-          <Column title="Last Name" dataIndex="lastName" key="lastName" />
-        </ColumnGroup>
-        <Column title="Age" dataIndex="age" key="age" />
-        <Column title="Address" dataIndex="address" key="address" />
-        <Column
-          title="Tags"
-          dataIndex="tags"
-          key="tags"
-          render={(tags) => (
-            <>
-              {tags.map((tag) => (
-                <Tag color="blue" key={tag}>
-                  {tag}
-                </Tag>
-              ))}
-            </>
-          )}
-        />
-        <Column
-          title="Action"
-          key="action"
-          render={(_, record) => (
-            <Space size="middle">
-              <a>Invite {record.lastName}</a>
-              <a>Delete</a>
-            </Space>
-          )}
-        />
-      </Table>
+    <div style={{ height: "100vh", border: "3px solid black" }}>
+      <div style={{ margin: "30px auto", width: "30%" }}>
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Firstname"
+            name="Firstname"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Firstname!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Lastname"
+            name="Lastname"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Lastname!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Age"
+            name="Age"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Age!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="remember"
+            valuePropName="checked"
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 }
