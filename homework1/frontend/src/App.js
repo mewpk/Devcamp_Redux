@@ -1,11 +1,28 @@
-import React from 'react'
-import Navbar from './Components/Navbar'
+import React from 'react';
+import "./App.css"
+import 'antd/dist/antd.css';
+import { Layout } from 'antd';
+import Navbar from './Components/Navbar';
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+const { Content, Footer } = Layout;
 
-export default function App() {
-  return (
-    <div>
-      <Navbar/>
-      
-    </div>
-  )
-}
+const App = () => (
+  <Layout>
+    <Navbar />
+    <Router>
+      <Routes>
+
+
+      </Routes>
+    </Router>
+    <Footer
+      style={{
+        textAlign: 'center',
+      }}
+    >
+      Create By MicroMew !
+    </Footer>
+  </Layout>
+);
+
+export default App;
