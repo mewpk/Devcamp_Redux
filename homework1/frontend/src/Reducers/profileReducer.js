@@ -16,16 +16,11 @@ export const profileReducer = createSlice({
             state.lastname = action.payload.Lastname
             state.age = action.payload.Age
         }
-
-
-
-
     }
+}
 
 
-
-
-})
+)
 
 // Export Reducer
 export default profileReducer.reducer

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const data = useSelector((state) => [state.profile]);
-  console.log(data);
+  // console.log(data);
   return (
     <div
       style={{
